@@ -26,7 +26,7 @@ async function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       sandbox: false
     },
-    icon: path.join(__dirname, '../assets/images/mg-icon.png'),
+    icon: path.join(__dirname, '../assets/images/icon.png'),
     frame: true,
     autoHideMenuBar: true,
     show: false
@@ -48,7 +48,7 @@ async function createWindow() {
 // Create the tray icon and menu
 function createTray() {
   const trayIcon = nativeImage.createFromPath(
-    path.join(__dirname, '../assets/images/mg-icon.png')
+    path.join(__dirname, '../assets/images/icon.png')
   ).resize({ width: 16, height: 16 });
 
   tray = new Tray(trayIcon);
