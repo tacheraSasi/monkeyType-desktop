@@ -24,7 +24,7 @@
     "@types/electron": "^1.6.12"
   },
   "dependencies": {
-    "is-online": "^11.0.0"
+    "is-online": "9.0.1"
   },
   "build": {
     "appId": "com.reddit.desktop",

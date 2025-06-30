@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Tray, Menu, Notification, nativeImage, session } from 'electron';
 import path from 'path';
+import isOnline from 'is-online';
 
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow;
@@ -35,7 +36,6 @@ async function createWindow() {
     mainWindow.show();
   });
 
-  const isOnline = (await import('is-online')).default;
   const online = await isOnline();
 
   if (online) {
