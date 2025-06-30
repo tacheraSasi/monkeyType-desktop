@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/assets/images/magreth.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/images/mg-icon.png" type="image/x-icon">
   <title>No Internet</title>
   <style>
     :root {
-      --body-bg-color: hsl(240, 10%, 3.9%);
-      --card-bg-color: hsla(240, 4.7%, 16.9%, 0.5);;
-      --border-color: #313437;
-      --title-color: #818a84;
-      --text-white: #fff;
-      --btn-bg: hsl(147, 59.4%, 49.2%);
-      --btn-text: #000;
-      --btn-light-bg: #425746;
+      --body-bg-color: #030303;
+      --card-bg-color: #1a1a1b;
+      --border-color: #343536;
+      --title-color: #d7dadc;
+      --text-color: #d7dadc;
+      --btn-bg: #ff4500;
+      --btn-text: #ffffff;
+      --btn-hover-bg: #ff571a;
     }
     
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Verdana', sans-serif;
       background-color: var(--body-bg-color);
-      color: var(--title-color);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -43,19 +43,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 10px;
+        margin-bottom: 20px;
     }
     .logo span{
-        font-size: x-large;
-        color:var(--text-white)
+        font-size: xx-large;
+        font-weight: bold;
+        color: var(--title-color);
     }
     .logo img {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
     }
 
     h1 {
-      color: var(--text-white);
+      color: var(--title-color);
       font-size: 26px;
       margin-bottom: 10px;
     }
@@ -63,7 +65,7 @@
     p {
       margin: 10px 0 20px;
       font-size: 16px;
-      color: var(--title-color);
+      color: var(--text-color);
     }
 
     .button {
@@ -76,25 +78,24 @@
       font-weight: 600;
       border: none;
       padding: 12px 20px;
-      border-radius: 5px;
+      border-radius: 9999px;
       cursor: pointer;
       font-size: 16px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: var(--btn-light-bg);
-      color: var(--text-white);
+      background-color: var(--btn-hover-bg);
     }
 
     .footer {
       margin-top: 30px;
       font-size: 12px;
-      color: var(--title-color);
+      color: var(--text-color);
     }
 
     .footer a {
-      color: var(--btn-light-bg);
+      color: var(--btn-bg);
       text-decoration: none;
     }
 
@@ -103,7 +104,7 @@
     }
 
     .retry-message {
-      color: var(--text-white);
+      color: var(--title-color);
       background-color: var(--border-color);
       padding: 10px;
       border-radius: 5px;
@@ -116,8 +117,8 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="./assets/images/magreth.png" alt="magreth" class="logo">
-      <span>Magreth</span>
+      <img src="./assets/images/mg-icon.png" alt="Reddit Logo">
+      <span>Reddit</span>
     </div>
     <h1>No Internet Connection</h1>
     <p>You are currently offline. Please check your connection and try again.</p>
@@ -131,7 +132,7 @@
     </div>
 
     <div class="footer">
-      Powered by <a href="#">ekilie</a>
+      Powered by <a href="https://github.com/Tacherasasi" target="_blank">Tachera Sasi</a>
     </div>
   </div>
 
@@ -140,11 +141,9 @@
       var message = document.getElementById('retryMessage');
       message.style.display = 'block';
       
-
       setTimeout(function() {
-        
         if (navigator.onLine) {
-          window.location.href = "https://magreth.ekilie.com/";
+          window.location.href = "https://www.reddit.com/";
         } else {
           alert('Still offline. Please check your connection.');
         }

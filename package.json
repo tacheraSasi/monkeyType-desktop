@@ -1,15 +1,16 @@
 {
-  "name": "instagram-desktop",
-  "productName": "Instagram Desktop",
+  "name": "reddit-desktop",
+  "productName": "Reddit Desktop",
   "version": "1.0.0",
-  "description": "A desktop application for Instagram with notifications and offline support.",
-  "main": "main.js",
+  "description": "A desktop application for Reddit with notifications and offline support.",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "electron .",
-    "build": "electron-builder",
-    "build-win": "electron-builder --win",
-    "build-linux": "electron-builder --linux",
-    "build-mac": "electron-builder --mac",
+    "build:ts": "tsc",
+    "start": "bun run build:ts && electron .",
+    "build": "bun run build:ts && electron-builder",
+    "build-win": "bun run build && electron-builder --win",
+    "build-linux": "bun run build && electron-builder --linux",
+    "build-mac": "bun run build && electron-builder --mac",
     "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [],
@@ -17,17 +18,19 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^32.3.3",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.8.3",
+    "@types/node": "^24.0.7",
+    "@types/electron": "^1.6.12"
   },
   "dependencies": {
     "is-online": "^11.0.0"
   },
   "build": {
-    "appId": "com.instagram.desktop",
-    "productName": "Instagram Desktop",
+    "appId": "com.reddit.desktop",
+    "productName": "Reddit Desktop",
     "files": [
-      "main.js",
-      "preload.js",
+      "dist/**/*",
       "assets/**/*",
       "offline.html"
     ],
@@ -48,12 +51,12 @@
         "deb",
         "tar.gz"
       ],
-      "icon": "assets/images/magreth.png",
+      "icon": "assets/images/mg-icon.png",
       "category": "Utility",
-      "maintainer": "ekilie <support@ekilie.com>"
+      "maintainer": "Tachera Sasi <tacherasasi@gmail.com>"
     }
   },
   "extraMetadata": {
-    "homepage": "https://magreth.ekilie.com"
+    "homepage": "https://github.com/Tacherasasi"
   }
 }
