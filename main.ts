@@ -4,16 +4,16 @@ import isOnline from 'is-online';
 
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow;
-const URL = 'https://www.reddit.com/';
+const URL = 'https://chat.deepseek.com/';
 const OFFLINE_URL = 'offline.html';
 
-app.setName('Reddit Desktop');
+app.setName('Deepseek Desktop');
 
 app.setAboutPanelOptions({
-  applicationName: 'Reddit Desktop',
+  applicationName: 'Deepseek Desktop',
   applicationVersion: '1.0.0',
   copyright: '© 2025 Tachera Sasi',
-  credits: 'This is an unofficial wrapper around Reddit.\\nMade with ❤️ using Electron by Tachera Sasi.',
+  credits: 'This is an unofficial wrapper around Deepseek.\nMade with ❤️ using Electron by Tachera Sasi.',
   website: URL
 });
 
@@ -57,7 +57,7 @@ function createTray() {
     { label: 'Quit', click: () => app.quit() }
   ]);
 
-  tray.setToolTip('Reddit Desktop');
+  tray.setToolTip('Deepseek Desktop');
   tray.setContextMenu(contextMenu);
 }
 
@@ -65,8 +65,8 @@ function createTray() {
 function scheduleMorningNotification() {
   if (Notification.isSupported()) {
     new Notification({
-      title: 'Reddit App',
-      body: 'Reddit Desktop is running in the background.'
+      title: 'Deepseek App',
+      body: 'Deepseek Desktop is running in the background.'
     }).show();
   }
 }
