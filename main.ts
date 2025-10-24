@@ -4,16 +4,16 @@ import isOnline from 'is-online';
 
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow;
-const URL = 'https://chat.deepseek.com/';
+const URL = "https://monkeytype.com/";
 const OFFLINE_URL = 'offline.html';
 
-app.setName('Deepseek Desktop');
+app.setName('MonkeyType Desktop');
 
 app.setAboutPanelOptions({
-  applicationName: 'Deepseek Desktop',
+  applicationName: 'MonkeyType Desktop',
   applicationVersion: '1.0.0',
   copyright: '© 2025 Tachera Sasi',
-  credits: 'This is an unofficial wrapper around Deepseek.\nMade with ❤️ using Electron by Tachera Sasi.',
+  credits: 'This is an unofficial wrapper around MonkeyType.\nMade with ❤️ using Electron by Tachera Sasi.',
   website: URL
 });
 
@@ -57,7 +57,7 @@ function createTray() {
     { label: 'Quit', click: () => app.quit() }
   ]);
 
-  tray.setToolTip('Deepseek Desktop');
+  tray.setToolTip('MonkeyType Desktop');
   tray.setContextMenu(contextMenu);
 }
 
@@ -65,8 +65,8 @@ function createTray() {
 function scheduleMorningNotification() {
   if (Notification.isSupported()) {
     new Notification({
-      title: 'Deepseek App',
-      body: 'Deepseek Desktop is running in the background.'
+      title: 'MonkeyType App',
+      body: 'MonkeyType Desktop is running in the background.'
     }).show();
   }
 }
