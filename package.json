@@ -1,8 +1,8 @@
 {
-  "name": "reddit-desktop",
-  "productName": "Reddit Desktop",
+  "name": "monkeytype-desktop",
+  "productName": "MonkeyType Desktop",
   "version": "1.0.0",
-  "description": "A desktop application for Reddit with notifications and offline support.",
+  "description": "A desktop application for MonkeyType with notifications and offline support.",
   "main": "dist/main.js",
   "scripts": {
     "build:ts": "tsc",
@@ -27,15 +27,15 @@
     "is-online": "9.0.1"
   },
   "build": {
-    "appId": "com.reddit.desktop",
-    "productName": "Reddit Desktop",
+    "appId": "com.monkeytype.desktop",
+    "productName": "MonkeyType Desktop",
     "files": [
       "dist/**/*",
       "assets/**/*",
       "offline.html"
     ],
     "mac": {
-      "icon": "build/icon.icns",
+      "icon": "build/Monkeytype.icns",
       "category": "public.app-category.utilities"
     },
     "win": {
@@ -51,7 +51,7 @@
         "deb",
         "tar.gz"
       ],
-      "icon": "assets/images/mg-icon.png",
+      "icon": "assets/images/Monkeytype.png",
       "category": "Utility",
       "maintainer": "Tachera Sasi <tacherasasi@gmail.com>"
     }
