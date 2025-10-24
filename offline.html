@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="./assets/images/mg-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap">
   <title>No Internet</title>
   <style>
     :root {
-      --body-bg-color: #030303;
-      --card-bg-color: #1a1a1b;
-      --border-color: #343536;
-      --title-color: #d7dadc;
-      --text-color: #d7dadc;
-      --btn-bg: #ff4500;
-      --btn-text: #ffffff;
-      --btn-hover-bg: #ff571a;
+      --body-bg-color: #323232;
+      --card-bg-color: #323232;
+      --border-color: #646669;
+      --title-color: #e2b714;
+      --text-color: #646669;
+      --btn-bg: #e2b714;
+      --btn-text: #323232;
+      --btn-hover-bg: #d4a700;
     }
     
     body {
       margin: 0;
-      font-family: 'Verdana', sans-serif;
+      font-family: 'Roboto Mono', monospace;
       background-color: var(--body-bg-color);
       color: var(--text-color);
       display: flex;
@@ -33,9 +34,9 @@
       text-align: center;
       background-color: var(--card-bg-color);
       padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border-color);
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
       max-width: 400px;
       width: 100%;
     }
@@ -50,6 +51,7 @@
         font-size: xx-large;
         font-weight: bold;
         color: var(--title-color);
+        text-transform: lowercase;
     }
     .logo img {
       width: 40px;
@@ -78,7 +80,7 @@
       font-weight: 600;
       border: none;
       padding: 12px 20px;
-      border-radius: 9999px;
+      border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
       transition: background-color 0.3s ease;
@@ -95,7 +97,7 @@
     }
 
     .footer a {
-      color: var(--btn-bg);
+      color: var(--title-color);
       text-decoration: none;
     }
 
@@ -117,8 +119,8 @@
 <body>
   <div class="container">
     <div class="logo">
-      <img src="./assets/images/mg-icon.png" alt="Reddit Logo">
-      <span>Reddit</span>
+      <img src="./assets/images/mg-icon.png" alt="Monkeytype Logo">
+      <span>monkeytype</span>
     </div>
     <h1>No Internet Connection</h1>
     <p>You are currently offline. Please check your connection and try again.</p>
@@ -143,7 +145,7 @@
       
       setTimeout(function() {
         if (navigator.onLine) {
-          window.location.href = "https://www.reddit.com/";
+          window.location.href = "https://monkeytype.com/";
         } else {
           alert('Still offline. Please check your connection.');
         }
