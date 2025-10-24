@@ -1,157 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./assets/images/mg-icon.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap">
-  <title>No Internet</title>
-  <style>
-    :root {
-      --body-bg-color: #323232;
-      --card-bg-color: #323232;
-      --border-color: #646669;
-      --title-color: #e2b714;
-      --text-color: #646669;
-      --btn-bg: #e2b714;
-      --btn-text: #323232;
-      --btn-hover-bg: #d4a700;
-    }
-    
-    body {
-      margin: 0;
-      font-family: 'Roboto Mono', monospace;
-      background-color: var(--body-bg-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 0 20px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./assets/images/mg-icon.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+    />
+    <title>No Internet</title>
+    <style>
+      :root {
+        --body-bg-color: #323232;
+        --card-bg-color: #323232;
+        --border-color: #646669;
+        --title-color: #e2b714;
+        --text-color: #646669;
+        --btn-bg: #e2b714;
+        --btn-text: #323232;
+        --btn-hover-bg: #d4a700;
+      }
 
-    .container {
-      text-align: center;
-      background-color: var(--card-bg-color);
-      padding: 40px;
-      border-radius: 0;
-      box-shadow: none;
-      border: none;
-      max-width: 400px;
-      width: 100%;
-    }
-    .logo{
+      body {
+        margin: 0;
+        font-family: "Roboto Mono", monospace;
+        background-color: var(--body-bg-color);
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 20px;
+      }
+
+      .container {
+        text-align: center;
+        background-color: var(--card-bg-color);
+        padding: 40px;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        max-width: 400px;
+        width: 100%;
+      }
+      .logo {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
         margin-bottom: 20px;
-    }
-    .logo span{
+      }
+      .logo span {
         font-size: xx-large;
         font-weight: bold;
         color: var(--title-color);
         text-transform: lowercase;
-    }
-    .logo img {
-      width: 40px;
-      height: 40px;
-    }
+      }
+      .logo img {
+        width: 40px;
+        height: 40px;
+      }
 
-    h1 {
-      color: var(--title-color);
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
+      h1 {
+        color: var(--title-color);
+        font-size: 26px;
+        margin-bottom: 10px;
+      }
 
-    p {
-      margin: 10px 0 20px;
-      font-size: 16px;
-      color: var(--text-color);
-    }
+      p {
+        margin: 10px 0 20px;
+        font-size: 16px;
+        color: var(--text-color);
+      }
 
-    .button {
-      margin-top: 20px;
-    }
+      .button {
+        margin-top: 20px;
+      }
 
-    button {
-      background-color: var(--btn-bg);
-      color: var(--btn-text);
-      font-weight: 600;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
+      button {
+        background-color: var(--btn-bg);
+        color: var(--btn-text);
+        font-weight: 600;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
 
-    button:hover {
-      background-color: var(--btn-hover-bg);
-    }
+      button:hover {
+        background-color: var(--btn-hover-bg);
+      }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: var(--text-color);
-    }
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: var(--text-color);
+      }
 
-    .footer a {
-      color: var(--title-color);
-      text-decoration: none;
-    }
+      .footer a {
+        color: var(--title-color);
+        text-decoration: none;
+      }
 
-    .footer a:hover {
-      text-decoration: underline;
-    }
+      .footer a:hover {
+        text-decoration: underline;
+      }
 
-    .retry-message {
-      color: var(--title-color);
-      background-color: var(--border-color);
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 30px;
-      font-size: 14px;
-    }
-    
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="logo">
-      <img src="./assets/images/mg-icon.png" alt="Monkeytype Logo">
-      <span>monkeytype</span>
+      .retry-message {
+        color: var(--title-color);
+        background-color: var(--border-color);
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 30px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="./assets/images/monkeytype.png" alt="Monkeytype Logo" />
+        <span>monkeytype</span>
+      </div>
+      <h1>No Internet Connection</h1>
+      <p>
+        You are currently offline. Please check your connection and try again.
+      </p>
+
+      <div class="button">
+        <button onclick="retryConnection()">Retry</button>
+      </div>
+
+      <div class="retry-message" id="retryMessage" style="display: none">
+        Trying to reconnect...
+      </div>
+
+      <div class="footer">
+        Powered by
+        <a href="https://github.com/Tacherasasi" target="_blank"
+          >Tachera Sasi</a
+        >
+      </div>
     </div>
-    <h1>No Internet Connection</h1>
-    <p>You are currently offline. Please check your connection and try again.</p>
-    
-    <div class="button">
-      <button onclick="retryConnection()">Retry</button>
-    </div>
 
-    <div class="retry-message" id="retryMessage" style="display: none;">
-      Trying to reconnect...
-    </div>
+    <script>
+      function retryConnection() {
+        var message = document.getElementById("retryMessage");
+        message.style.display = "block";
 
-    <div class="footer">
-      Powered by <a href="https://github.com/Tacherasasi" target="_blank">Tachera Sasi</a>
-    </div>
-  </div>
-
-  <script>
-    function retryConnection() {
-      var message = document.getElementById('retryMessage');
-      message.style.display = 'block';
-      
-      setTimeout(function() {
-        if (navigator.onLine) {
-          window.location.href = "https://monkeytype.com/";
-        } else {
-          alert('Still offline. Please check your connection.');
-        }
-        message.style.display = 'none';
-      }, 3000);
-    }
-  </script>
-</body>
+        setTimeout(function () {
+          if (navigator.onLine) {
+            window.location.href = "https://monkeytype.com/";
+          } else {
+            alert("Still offline. Please check your connection.");
+          }
+          message.style.display = "none";
+        }, 3000);
+      }
+    </script>
+  </body>
 </html>

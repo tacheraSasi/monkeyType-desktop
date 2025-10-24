@@ -51,7 +51,7 @@
         "deb",
         "tar.gz"
       ],
-      "icon": "assets/images/Monkeytype.png",
+      "icon": "assets/images/monkeytype.png",
       "category": "Utility",
       "maintainer": "Tachera Sasi <tacherasasi@gmail.com>"
     }

@@ -1,20 +1,29 @@
-import { app, BrowserWindow, Tray, Menu, Notification, nativeImage, session } from 'electron';
-import path from 'path';
-import isOnline from 'is-online';
+import {
+  app,
+  BrowserWindow,
+  Tray,
+  Menu,
+  Notification,
+  nativeImage,
+  session,
+} from "electron";
+import path from "path";
+import isOnline from "is-online";
 
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow;
 const URL = "https://monkeytype.com/";
-const OFFLINE_URL = 'offline.html';
+const OFFLINE_URL = "offline.html";
 
-app.setName('MonkeyType Desktop');
+app.setName("MonkeyType Desktop");
 
 app.setAboutPanelOptions({
-  applicationName: 'MonkeyType Desktop',
-  applicationVersion: '1.0.0',
-  copyright: '© 2025 Tachera Sasi',
-  credits: 'This is an unofficial wrapper around MonkeyType.\nMade with ❤️ using Electron by Tachera Sasi.',
-  website: URL
+  applicationName: "MonkeyType Desktop",
+  applicationVersion: "1.0.0",
+  copyright: "© 2025 Tachera Sasi",
+  credits:
+    "This is an unofficial wrapper around MonkeyType.\nMade with ❤️ using Electron by Tachera Sasi.",
+  website: URL,
 });
 
 // Create the main browser window
@@ -23,16 +32,16 @@ async function createWindow() {
     width: 992,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      sandbox: false
+      preload: path.join(__dirname, "preload.js"),
+      sandbox: false,
     },
-    icon: path.join(__dirname, '../assets/images/Monkeytype.png'),
+    icon: path.join(__dirname, "../assets/images/monkeytype.png"),
     frame: true,
     autoHideMenuBar: true,
-    show: false
+    show: false,
   });
 
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.once("ready-to-show", () => {
     mainWindow.show();
   });
 
@@ -47,17 +56,17 @@ async function createWindow() {
 
 // Create the tray icon and menu
 function createTray() {
-  const trayIcon = nativeImage.createFromPath(
-    path.join(__dirname, '../assets/images/Monkeytype.png')
-  ).resize({ width: 16, height: 16 });
+  const trayIcon = nativeImage
+    .createFromPath(path.join(__dirname, "../assets/images/monkeytype.png"))
+    .resize({ width: 16, height: 16 });
 
   tray = new Tray(trayIcon);
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show App', click: () => mainWindow.show() },
-    { label: 'Quit', click: () => app.quit() }
+    { label: "Show App", click: () => mainWindow.show() },
+    { label: "Quit", click: () => app.quit() },
   ]);
 
-  tray.setToolTip('MonkeyType Desktop');
+  tray.setToolTip("MonkeyType Desktop");
   tray.setContextMenu(contextMenu);
 }
 
@@ -65,8 +74,8 @@ function createTray() {
 function scheduleMorningNotification() {
   if (Notification.isSupported()) {
     new Notification({
-      title: 'MonkeyType App',
-      body: 'MonkeyType Desktop is running in the background.'
+      title: "MonkeyType App",
+      body: "MonkeyType Desktop is running in the background.",
     }).show();
   }
 }
@@ -77,26 +86,29 @@ app.whenReady().then(() => {
   createTray();
   scheduleMorningNotification();
 
-  session.defaultSession.setPermissionRequestHandler((webContents, permission, callback) => {
-    if (permission === 'notifications') {
-      callback(true);
-    } else {
-      callback(false);
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === "notifications") {
+        callback(true);
+      } else {
+        callback(false);
+      }
     }
-  });
+  );
 
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-    details.requestHeaders['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
+    details.requestHeaders["User-Agent"] =
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36";
     callback({ cancel: false, requestHeaders: details.requestHeaders });
   });
 
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
   });
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });
