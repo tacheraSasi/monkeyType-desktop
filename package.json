@@ -35,7 +35,7 @@
       "offline.html"
     ],
     "mac": {
-      "icon": "build/Monkeytype.icns",
+      "icon": "build/icon.icns",
       "category": "public.app-category.utilities"
     },
     "win": {
