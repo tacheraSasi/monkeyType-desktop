@@ -26,6 +26,42 @@ app.setAboutPanelOptions({
   website: URL,
 });
 
+// Stable rendering defaults for Linux/Wayland, applied *before* app is ready.
+// Verified on Hyprland/wlroots: the GPU path segfaults the GPU process
+// (exit 139) under XWayland and fails GBM buffer creation under native
+// Wayland, leaving no mapped surface. Native Wayland + software rendering
+// presents cleanly via wl_shm, and monkeytype.com is light DOM so software
+// rendering is plenty fast.
+// Overrides:
+//   MONKEYTYPE_OZONE_HINT=x11  -> force XWayland instead of native Wayland
+//   MONKEYTYPE_ENABLE_GPU=1    -> opt back into hardware acceleration
+if (process.platform === "linux") {
+  const ozoneHint = process.env.MONKEYTYPE_OZONE_HINT ?? "auto";
+  if (ozoneHint === "x11") {
+    app.commandLine.appendSwitch("ozone-platform", "x11");
+  } else {
+    app.commandLine.appendSwitch("ozone-platform-hint", ozoneHint);
+  }
+  if (!process.env.MONKEYTYPE_ENABLE_GPU) {
+    app.commandLine.appendSwitch("disable-gpu");
+  }
+}
+
+// `is-online` probes the network and can hang on captive portals / dead
+// DNS. Don't let it block the first load (and therefore first paint) forever.
+async function checkOnlineWithTimeout(timeoutMs = 5000): Promise<boolean> {
+  try {
+    return await Promise.race([
+      isOnline(),
+      new Promise<boolean>((resolve) =>
+        setTimeout(() => resolve(true), timeoutMs),
+      ),
+    ]);
+  } catch {
+    return true;
+  }
+}
+
 // Create the main browser window
 async function createWindow() {
   mainWindow = new BrowserWindow({
@@ -41,16 +77,49 @@ async function createWindow() {
     show: false,
   });
 
-  mainWindow.once("ready-to-show", () => {
-    mainWindow.show();
+  let shown = false;
+  let fallbackTimer: NodeJS.Timeout | undefined;
+  const showOnce = () => {
+    if (shown) return;
+    if (!mainWindow || mainWindow.isDestroyed()) return;
+    shown = true;
+    if (fallbackTimer) clearTimeout(fallbackTimer);
+    if (!mainWindow.isVisible()) {
+      mainWindow.show();
+    }
+  };
+
+  mainWindow.once("ready-to-show", showOnce);
+
+  // Fallback: force-show even if `ready-to-show` never fires (e.g. first
+  // paint fails/races under Wayland, or load stalls).
+  fallbackTimer = setTimeout(showOnce, 3000);
+  mainWindow.once("closed", () => {
+    if (fallbackTimer) clearTimeout(fallbackTimer);
   });
 
-  const online = await isOnline();
+  // If the online load fails, fall back to the bundled offline page instead
+  // of leaving a blank hidden window.
+  mainWindow.webContents.on(
+    "did-fail-load",
+    (_event, _code, _desc, validatedURL, isMainFrame) => {
+      if (
+        isMainFrame &&
+        !validatedURL.endsWith(OFFLINE_URL) &&
+        mainWindow &&
+        !mainWindow.isDestroyed()
+      ) {
+        void mainWindow.loadFile(OFFLINE_URL).then(showOnce);
+      }
+    },
+  );
+
+  const online = await checkOnlineWithTimeout();
 
   if (online) {
-    mainWindow.loadURL(URL);
+    mainWindow.loadURL(URL).catch(showOnce);
   } else {
-    mainWindow.loadFile(OFFLINE_URL);
+    mainWindow.loadFile(OFFLINE_URL).then(showOnce, showOnce);
   }
 }
 
@@ -62,7 +131,14 @@ function createTray() {
 
   tray = new Tray(trayIcon);
   const contextMenu = Menu.buildFromTemplate([
-    { label: "Show App", click: () => mainWindow.show() },
+    {
+      label: "Show App",
+      click: () => {
+        if (mainWindow && !mainWindow.isDestroyed()) {
+          mainWindow.show();
+        }
+      },
+    },
     { label: "Quit", click: () => app.quit() },
   ]);
 
